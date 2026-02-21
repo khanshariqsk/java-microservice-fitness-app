@@ -1,0 +1,48 @@
+# ==================================================
+# Application
+# ==================================================
+spring:
+  # ==================================================
+  # Database (PostgreSQL)
+  # ==================================================
+  datasource:
+    url: jdbc:postgresql://localhost:5432/fitness_micro_userservice
+    username: ${USER_SERVICE_DB_NAME}
+    password: ${USER_SERVICE_DB_PASSWORD}
+
+
+  # ==================================================
+  # JPA / Hibernate
+  # ==================================================
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    open-in-view: false
+
+
+  # ==================================================
+  # Spring MVC
+  # ==================================================
+  mvc:
+    throw-exception-if-no-handler-found: true
+
+  web:
+    resources:
+      add-mappings: false
+
+
+# ==================================================
+# Custom Application Settings
+# ==================================================
+app:
+  debug-errors: true
+
+
+# ==================================================
+# Eureka (Service Discovery)
+# ==================================================
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka/

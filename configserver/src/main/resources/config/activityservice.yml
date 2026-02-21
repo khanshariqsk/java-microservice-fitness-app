@@ -1,0 +1,70 @@
+# ==================================================
+# Application
+# ==================================================
+spring:
+  # =============================
+  # Security - OAuth2 Resource Server (JWT)
+  # =============================
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri: http://localhost:8080/realms/fitness-app
+
+  # ==================================================
+  # Database (MongoDB)
+  # ==================================================
+  mongodb:
+    uri: mongodb://localhost:27017/aiactivityfitness
+
+
+  # ==================================================
+  # Spring MVC
+  # ==================================================
+  mvc:
+    throw-exception-if-no-handler-found: true
+
+  web:
+    resources:
+      add-mappings: false
+
+
+  # ==================================================
+  # Kafka
+  # ==================================================
+  kafka:
+    bootstrap-servers: localhost:9092
+    producer:
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
+
+# ==================================================
+# Custom Application Settings
+# ==================================================
+app:
+  debug-errors: true
+  kafka:
+    topics:
+      activity-events: activity-events
+
+
+# ==================================================
+# Eureka (Service Discovery)
+# ==================================================
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka/
+
+
+# ==================================================
+# External Services Configuration
+# ==================================================
+services:
+  userservice:
+    base-url: http://userservice
+    base-path-auth: /api/v1/auth
+    base-path-users: /api/v1/users
+    endpoints:
+      exists: /{keycloakId}/exists
+      find-by-id: /{keycloakId}
